@@ -172,7 +172,7 @@ int main(int argc, char **argv) {
         if (argc >= 2 && argc <= 3) {
 	  uint64 est_rels = strtoull(argv[1], NULL, 10);
 	  fprintf(stderr, "Expecting approx. %llu million relations.\n", est_rels);
-          if (argc == 3) NUM_HASHES_FOR_BLOOM_FILTER = atoi(argv[3]);
+          if (argc == 3) NUM_HASHES_FOR_BLOOM_FILTER = atoi(argv[2]);
 	  NUM_BLOOM_FILTER_INTS =
 	      (uint64) ( (est_rels * 125000 / sizeof(int)) * NUM_HASHES_FOR_BLOOM_FILTER /
 			0.7); // 125000 = 1000000 / 8
