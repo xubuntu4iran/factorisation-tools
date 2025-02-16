@@ -163,17 +163,9 @@ int strccnt(const char *s, int c)
 	while (*us) if (*us++ == uc) n++;
 	return n;
 }
-// Function to trim leading whitespace characters
-char *trim_leading_whitespace(char *str) {
-    while (isspace((unsigned char) *str)) {
-        str++;
-    }
-    return str;
-}
 int main(int argc, char **argv) {
 	char *tmp;
 	char buf[512];
-	char *tbuf;
 	FILE *badfile;
 	uint64 numbad=0, numdups=0, numuniq=0;
 
@@ -202,15 +194,13 @@ int main(int argc, char **argv) {
 	init_bloom_filter(&bloom);
 
 	while (fgets(buf, sizeof(buf), stdin)) {
-		// Trim leading whitespace characters
-        tbuf = trim_leading_whitespace(buf);
-		if (tbuf[0] == '#' || tbuf[0] == '\r' || tbuf[0] == '\n' || tbuf[0] == '\t' || tbuf[0] == '\0') {
+		if (buf[0] == '#') {
 			//printf("%s", buf);
 			continue;
 		}
 		 
-		if (tbuf[0] == 'N') {
-			//printf("%s", buf);
+		if (buf[0] == 'N') {
+			printf("%s", buf);
 			continue;
 		}
 
